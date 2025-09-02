@@ -1,0 +1,68 @@
+<!doctype html>
+var(--bg); }
+button{ background:#f6f7f9 }
+button:hover{ background:#eef1f6; border-color:#d9dde3 }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header aria-label="사이트 제목">
+<div class="logo" aria-hidden="true">
+<span class="dot blue"></span>
+<span class="dot red"></span>
+<span class="dot yellow"></span>
+<span class="dot green"></span>
+Mini&nbsp;Search
+</div>
+</header>
+
+
+<section class="card" aria-label="검색">
+<form id="searchForm" role="search" aria-label="웹 검색">
+<div class="searchbar">
+<!-- 검색 아이콘 -->
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/></svg>
+<label class="sr-only" for="q">검색어</label>
+<input id="q" type="search" name="q" inputmode="search" placeholder="검색어를 입력하세요" autocomplete="on" aria-label="검색어 입력" />
+<!-- 음성 아이콘(장식) -->
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V7a3 3 0 1 0-6 0v4a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2Z"/></svg>
+</div>
+<div class="actions">
+<button type="submit" data-mode="search" aria-label="검색 실행">Google 검색</button>
+<button type="submit" data-mode="lucky" aria-label="I'm Feeling Lucky">I'm Feeling Lucky</button>
+</div>
+</form>
+<p class="foot">이 페이지는 학습·포트폴리오용 클론 예제입니다. 상표권/로고는 포함하지 않았습니다.</p>
+</section>
+
+
+<div class="links" aria-label="바닥글">
+<a href="#" onclick="alert('임시 링크입니다. 필요에 맞게 수정하세요!'); return false;">광고</a>
+<a href="#" onclick="alert('임시 링크입니다. 필요에 맞게 수정하세요!'); return false;">비즈니스</a>
+<a href="#" onclick="alert('임시 링크입니다. 필요에 맞게 수정하세요!'); return false;">개인정보처리방침</a>
+<a href="#" onclick="alert('임시 링크입니다. 필요에 맞게 수정하세요!'); return false;">약관</a>
+</div>
+</main>
+
+
+<script>
+// 간단한 검색 동작: 실제 구글 검색으로 리디렉션
+const form = document.getElementById('searchForm');
+form.addEventListener('submit', (e) => {
+e.preventDefault();
+const q = new URLSearchParams(new FormData(form)).get('q')?.trim();
+if(!q){
+document.getElementById('q').focus();
+return;
+}
+const mode = (e.submitter && e.submitter.dataset.mode) || 'search';
+const base = 'https://www.google.com/search';
+const url = mode === 'lucky'
+? `${base}?btnI=I&q=${encodeURIComponent(q)}`
+: `${base}?q=${encodeURIComponent(q)}`;
+window.location.href = url;
+});
+</script>
+</body>
+</html>
